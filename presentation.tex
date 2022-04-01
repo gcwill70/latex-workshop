@@ -14,6 +14,8 @@
 
 \usepackage[T1]{fontenc}
 
+
+
 % for code listings
 \usepackage{listings}
 \lstset
@@ -131,18 +133,21 @@
 
 \begin{frame}[fragile]{\LaTeX\ Flowchart}
 
-\tikzstyle{input} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=orange!30]
-\tikzstyle{io} = [rectangle, trapezium left angle=70, trapezium right angle=110, minimum width=2cm, text centered, minimum width=3cm, minimum height=1cm, draw=black, fill=blue!30]
-\tikzstyle{output} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{input} = [rectangle, rounded corners, minimum width=2cm, minimum height=1cm,text centered, draw=black, fill=orange!30]
+\tikzstyle{io} = [rectangle, trapezium left angle=70, trapezium right angle=110, minimum width=cm, text centered, minimum width=2cm, minimum height=1cm, draw=black, fill=blue!30]
+\tikzstyle{output} = [rectangle, rounded corners, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=green!30]
 \tikzstyle{arrow} = [thick,->,>=stealth]
 
-\begin{tikzpicture}[node distance=2cm]
-	\node (input) [input] {doc.tex};
-	\node (rend) [io, right of=input, xshift=2cm] {\LaTeX\ Renderer};
+\begin{tikzpicture}[node distance=1cm]
+	\node (pic) [input, yshift=1cm] {image file};
+	\node (bib) [input, yshift=-1cm] {biblography.bib};
+	\node (tex) [input, right of=pic, yshift=-1cm, xshift=2cm] {doc.tex};
+	\node (rend) [io, right of=tex, xshift=2cm] {\LaTeX\ Renderer};
 	\node (output) [output, right of=rend, xshift=2cm] {doc.pdf};
 
-
-	\draw [arrow] (input) -- (rend);
+	\draw [arrow] (pic) -- (tex);
+	\draw [arrow] (bib) -- (tex);
+	\draw [arrow] (tex) -- (rend);
 	\draw [arrow] (rend) -- (output);
 \end{tikzpicture}
 \end{frame}
@@ -287,6 +292,33 @@
 		\label{fig:single}
 \end{figure}
 \end{lstlisting}
+\end{frame}
+
+\subsection*{Bibliography using BibTex}
+\begin{frame}[fragile]{Bibliography}
+		
+		Some of the info in this presentation comes from \cite{oetiker_2003} and \cite{overleaf}.
+		
+		\bibliographystyle{plain}
+		\bibliography{bibliography}
+
+	\begin{lstlisting}[basicstyle=\tiny]
+		Some of the info in this presentation comes from \cite{oetiker_2003} and \cite{overleaf}.
+		\bibliographystyle{plain}
+		\bibliography{bibliography}
+	
+	\end{lstlisting}
+	\begin{lstlisting}[basicstyle=\tiny]
+		@book{oetiker_2003, 
+		 	place={Cambridge, MA}, 
+		 	title={The Not So Short Introduction to LATEX 2e}, 
+		 	url={https://tobi.oetiker.ch/lshort/lshort.pdf}, 
+		 	publisher={Free Software Foundation}, 
+		 	author={Oetiker, Tobias}, 
+		 	year={2003}
+		} 
+	\end{lstlisting}
+
 \end{frame}
 
 \section*{Demo}
